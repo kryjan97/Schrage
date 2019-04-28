@@ -63,7 +63,9 @@ std::vector<Jobs> load_jobs() {
 		jobs_vector.push_back(Jobs(r, p, q));
 	}
 
-	std::cout << "File: " << files[file_nr] << "\nJobs: " << jobs_ammount << "\nColumns: " << columns << std::endl;
+	std::cout << "File: " << files[file_nr] 
+		<< "\nJobs: " << jobs_ammount 
+		<< "\nColumns: " << columns << std::endl;
 	
 	std::sort(jobs_vector.begin(), jobs_vector.end(), argMin());
 
