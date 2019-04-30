@@ -6,7 +6,7 @@
 #include <string>
 
 int jobs_ammount;
-const int file_nr = 2;
+const int file_nr = 3;
 
 class Jobs
 {
@@ -55,7 +55,7 @@ std::vector<Jobs> load_jobs() {
 	std::ifstream file;
 	std::string files[3] = {"in50.txt", "in100.txt", "in200.txt"};
 
-	file.open(files[file_nr]);
+	file.open(files[file_nr-1]);
 	int r,p,q,columns;
 	file >> jobs_ammount >> columns;
 	for (int i = 0; i < jobs_ammount; i++)
@@ -64,7 +64,7 @@ std::vector<Jobs> load_jobs() {
 		jobs_vector.push_back(Jobs(r, p, q));
 	}
 
-	std::cout << "File: " << files[file_nr] 
+	std::cout << "File: " << files[file_nr-1] 
 		<< "\nJobs: " << jobs_ammount 
 		<< "\nColumns: " << columns << std::endl;
 	
@@ -128,7 +128,7 @@ std::vector<Jobs> Schrage(std::vector<Jobs> jobs_vector)
 		}
 	}
 	
-	std::cout << "\nCmax: " << Cmax;
+	std::cout << "\nCmax: " << Cmax << std::endl;
 	return Permutation; //Jaka kolejnosc powinno mi zwrocic?
 }
 
