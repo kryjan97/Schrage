@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <string>
 
 int jobs_ammount;
 const int file_nr = 2;
@@ -84,6 +85,7 @@ std::vector<Jobs> Schrage(std::vector<Jobs> jobs_vector)
 	int Cmax = 0;
 	int temp = 0;
 	int temp_order = 0;
+	
 	std::vector<Jobs> Permutation;
 	std::vector<Jobs> not_ready = jobs_vector;
 	std::vector<Jobs> ready;
@@ -121,10 +123,11 @@ std::vector<Jobs> Schrage(std::vector<Jobs> jobs_vector)
 			Cmax = find_max(Cmax, t + Permutation.back().get_Q());
 			temp = 0;
 			temp_order = 0;
+			
 			i++;
 		}
 	}
-
+	
 	std::cout << "\nCmax: " << Cmax;
 	return Permutation; //Jaka kolejnosc powinno mi zwrocic?
 }
