@@ -116,12 +116,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Schrage.cpp" />
-    <ClCompile Include="Zadanie.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Schrage.h" />
-    <ClInclude Include="Zadanie.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="in100.txt" />
