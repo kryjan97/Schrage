@@ -6,7 +6,7 @@
 #include <string>
 
 int jobs_ammount;
-const int file_nr = 3;
+const int file_nr = 2;
 
 class Jobs
 {
