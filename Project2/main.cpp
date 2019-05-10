@@ -6,7 +6,7 @@
 #include <string>
 
 int jobs_ammount;
-const int file_nr = 2;
+const int file_nr = 3;
 
 class Jobs
 {
@@ -133,12 +133,84 @@ std::vector<Jobs> Schrage(std::vector<Jobs> jobs_vector)
 }
 
 
+std::vector<Jobs> Schrage_pmtn(std::vector<Jobs> jobs_vector)
+{
+	int Cmax = 0;
+	std::vector<Jobs> ready;
+	std::vector<Jobs> not_ready = jobs_vector;
+	std::vector<Jobs> Permutation;
+	std::vector<Jobs> current_job;
+	std::vector<Jobs> temp_job;
+	current_job.push_back(Jobs(0, 0, 999999));
+	temp_job.push_back(Jobs(0, 0, 0));
+	
+	int t = 0;
+
+	int temp = 0;
+	int temp_order = 0;
+
+	while (!empty(ready) || !empty(not_ready))
+	{
+		while (!empty(not_ready) && not_ready.front().get_R() <= t)
+		{
+			ready.push_back(not_ready.front());	
+			temp_job.erase(temp_job.begin());
+			temp_job.push_back(not_ready.front());	
+			not_ready.erase(not_ready.begin());
+
+			if (temp_job.front().get_Q() > current_job.front().get_Q())
+			{
+				current_job.front().setP(t - temp_job.front().get_R());
+				t = temp_job.front().get_R();
+				
+
+				if (current_job.front().get_P() > 0)
+					ready.push_back(current_job.front());
+			}
+		}
+		////
+		if (empty(ready))
+			t = not_ready.front().get_R();
+		else
+		{
+			if (ready.size() > 1)
+			{
+				for (int j = 0; j < ready.size(); j++)
+				{
+					if (ready[j].get_Q() >= temp)
+					{
+						temp = ready[j].get_Q();
+						temp_order = j;
+					}
+				}
+			}
+
+			Permutation.push_back(ready[temp_order]);	//add jobs to permutation
+			current_job.erase(current_job.begin());
+			current_job.push_back(ready[temp_order]);	//adding to current job
+
+			ready.erase(ready.begin() + temp_order);
+
+			t += Permutation.back().get_P();
+			Cmax = find_max(Cmax, t + Permutation.back().get_Q());
+
+			temp = 0;
+			temp_order = 0;
+		}
+
+	}
+
+	std::cout << "\nCmax z przerwaniami: " << Cmax << std::endl;
+	return Permutation; 
+}
+
 
 int main() {
 
 	std::vector<Jobs> jobs_vector = load_jobs();
 	std::vector<Jobs> Permutation = Schrage(jobs_vector);
-
+	std::vector<Jobs> Permutation2 = Schrage_pmtn(jobs_vector);
+	
 
 	system("pause");
 	return 0;
